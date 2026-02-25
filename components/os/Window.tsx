@@ -21,18 +21,25 @@ export const Window: React.FC<WindowProps> = ({ id, children }) => {
 
     return (
         <motion.div
-            drag
+            drag={!windowState.isMaximized}
             dragMomentum={false}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0.9, opacity: 0, x: "-50%", y: "-50%" }}
+            animate={{
+                scale: 1,
+                opacity: 1,
+                x: windowState.isMaximized ? 0 : "-50%",
+                y: windowState.isMaximized ? 0 : "-50%",
+                left: windowState.isMaximized ? 0 : "50%",
+                top: windowState.isMaximized ? 0 : "45%"
+            }}
             exit={{ scale: 0.9, opacity: 0 }}
             onMouseDown={() => focusWindow(id)}
             style={{ zIndex: windowState.zIndex }}
             className={cn(
-                "absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 flex flex-col overflow-hidden rounded-xl border border-os-border bg-os-window shadow-2xl",
+                "absolute flex flex-col overflow-hidden rounded-xl border border-os-border bg-os-window shadow-2xl transition-all duration-300",
                 isActive && "ring-1 ring-os-accent/30",
                 windowState.isMaximized
-                    ? "inset-0 !h-full !w-full !max-w-none !transform-none !left-0 !top-0 rounded-none border-b-0"
+                    ? "inset-0 !h-full !w-full !max-w-none rounded-none border-b-0"
                     : "h-[500px] w-full max-w-2xl"
             )}
         >
@@ -68,7 +75,7 @@ export const Window: React.FC<WindowProps> = ({ id, children }) => {
             </div>
 
             {/* Window Body */}
-            <div className="flex-1 overflow-auto p-6 custom-scrollbar">
+            <div className="flex-1 overflow-auto custom-scrollbar">
                 {children}
             </div>
         </motion.div>

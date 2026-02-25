@@ -33,51 +33,57 @@ export const Desktop: React.FC = () => {
 
                 <SystemBar />
 
-                <div className="relative h-full w-full pt-9 pb-24 px-4">
+                <div className="relative h-full w-full pt-9 pb-24">
                     <Hero />
 
-                    {/* Render Windows */}
-                    {windows.terminal.isOpen && (
-                        <Window id="terminal">
-                            <Terminal />
-                        </Window>
-                    )}
+                    {/* Window Layer */}
+                    <div className="relative z-10 h-full w-full px-4 pointer-events-none">
+                        <div className="h-full w-full pointer-events-auto">
+                            <AnimatePresence>
+                                {windows.terminal.isOpen && (
+                                    <Window id="terminal">
+                                        <Terminal />
+                                    </Window>
+                                )}
 
-                    {windows.explorer.isOpen && (
-                        <Window id="explorer">
-                            <Explorer />
-                        </Window>
-                    )}
+                                {windows.explorer.isOpen && (
+                                    <Window id="explorer">
+                                        <Explorer />
+                                    </Window>
+                                )}
 
-                    {windows.about.isOpen && (
-                        <Window id="about">
-                            <About />
-                        </Window>
-                    )}
+                                {windows.about.isOpen && (
+                                    <Window id="about">
+                                        <About />
+                                    </Window>
+                                )}
 
-                    {windows.skills.isOpen && (
-                        <Window id="skills">
-                            <Skills />
-                        </Window>
-                    )}
+                                {windows.skills.isOpen && (
+                                    <Window id="skills">
+                                        <Skills />
+                                    </Window>
+                                )}
 
-                    {windows.projects.isOpen && (
-                        <Window id="projects">
-                            <Projects />
-                        </Window>
-                    )}
+                                {windows.projects.isOpen && (
+                                    <Window id="projects">
+                                        <Projects />
+                                    </Window>
+                                )}
 
-                    {windows.vscode.isOpen && (
-                        <Window id="vscode">
-                            <VSCodeViewer />
-                        </Window>
-                    )}
+                                {windows.vscode.isOpen && (
+                                    <Window id="vscode">
+                                        <VSCodeViewer />
+                                    </Window>
+                                )}
 
-                    {windows.contact.isOpen && (
-                        <Window id="contact">
-                            <Contact />
-                        </Window>
-                    )}
+                                {windows.contact.isOpen && (
+                                    <Window id="contact">
+                                        <Contact />
+                                    </Window>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
                 </div>
 
                 <Dock />

@@ -57,7 +57,7 @@ const skillSections = [
 
 export const Skills: React.FC = () => {
     return (
-        <div className="h-full w-full space-y-8 p-1">
+        <div className="h-full w-full space-y-8 p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {skillSections.map((section) => (
                     <div key={section.title} className={cn(
